@@ -2,32 +2,43 @@
  * @Author: louzhedong
  * @Date: 2021-02-23 11:59:05
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-02-23 14:58:25
+ * @LastEditTime: 2021-02-23 19:39:53
  * @Description: 中心画布 
 -->
 
 <template>
-  <div class="pane-area" @drop="handleDrop">
-    <component 
-      v-for="(item, key) in componentData"
-      :is="item.component"
+  <div class="pane-area" @drop="handleDrop" @dragover="handleDragOver">
+    <v-shape 
+      v-for="(item, key) in componentData" 
       :key="key"
-      :style="item.style"
-      :propValue="item.propValue"
-    />
+      :defaultStyle="item.style"
+      :active="true"
+      :zIndex="item.zIndex"
+      :element="item"
+      >
+      <component
+        :is="item.component"
+        :ownStyle="getComponentStyle(item.style)"
+        :propValue="item.propValue"
+      />
+    </v-shape>
   </div>
 </template>
 
 <script>
+import getComponentStyle from '@/utils/getComponentStyle';
+
 export default {
   data() {
     return {
+      getComponentStyle,
       componentData: [
         {
           component: 'v-text',
           propValue: '文字',
           animations: [],
           events: {},
+          zIndex: 0,
           style: {
             width: 200,
             height: 33,
@@ -45,13 +56,17 @@ export default {
 
   methods: {
     handleDrop(e) {
-      console.log(11);
-      e.preventDefaule();
+      const type = e.dataTransfer.getData('type');
+      console.log(type);
+      e.preventDefault();
       e.stopPropagation();
+    },
 
-      
-    }
-  }
+    handleDragOver(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    },
+  },
 };
 </script>
 
@@ -61,5 +76,6 @@ export default {
   height: 100%;
   background: #fff;
   margin: 0 10px;
+  padding: 20px;
 }
 </style>
