@@ -2,7 +2,7 @@
  * @Author: louzhedong
  * @Date: 2021-02-23 11:59:05
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-02-24 17:21:06
+ * @LastEditTime: 2021-02-24 17:48:57
  * @Description: 中心画布 
 -->
 
@@ -65,8 +65,10 @@ export default {
       e.preventDefault();
       e.stopPropagation();
       const type = e.dataTransfer.getData('type');
-
-      this.$store.commit('addComponent', getComponentAttribute(type));
+      console.log(e.offsetX);
+      const left = e.offsetX - 30;
+      const top = e.offsetY - 20;
+      this.$store.commit('addComponent', getComponentAttribute(type, left, top));
     },
 
     handleDragOver(e) {

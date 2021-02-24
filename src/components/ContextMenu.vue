@@ -2,7 +2,7 @@
  * @Author: louzhedong
  * @Date: 2021-02-24 15:53:23
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-02-24 17:15:29
+ * @LastEditTime: 2021-02-24 17:36:20
  * @Description: 右键菜单
 -->
 
@@ -14,9 +14,10 @@
   >
     <ul>
       <li @click="handleMoveUp">上移</li>
-      <li>下移</li>
+      <li @click="handleMoveDown">下移</li>
       <li>置顶</li>
       <li>置底</li>
+      <li @click="handleDelete">删除</li>
     </ul>
   </div>
 </template>
@@ -35,6 +36,16 @@ export default {
       this.$store.commit('moveUp');
       this.$store.commit('hideContextMenu');
     },
+
+    handleMoveDown() {
+      this.$store.commit('moveDown');
+      this.$store.commit('hideContextMenu');
+    },
+
+    handleDelete() {
+      this.$store.commit('deleteComponent');
+      this.$store.commit("hideContextMenu");
+    }
   },
 };
 </script>

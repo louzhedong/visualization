@@ -2,12 +2,12 @@
  * @Author: louzhedong
  * @Date: 2021-02-24 10:44:01
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-02-24 16:47:07
+ * @LastEditTime: 2021-02-24 17:47:24
  * @Description: 描述一下咯
  */
 import uuid from '@/utils/uuid';
 
-export default function getComponentAttribute(type) {
+export default function getComponentAttribute(type, left = 0, top = 0) {
   let component;
 
   if (type === 'v-text') {
@@ -18,8 +18,8 @@ export default function getComponentAttribute(type) {
       events: {},
       uuid: uuid(),
       style: {
-        top: 0,
-        left: 0,
+        top,
+        left,
         width: 200,
         height: 33,
         fontSize: 14,
@@ -38,8 +38,8 @@ export default function getComponentAttribute(type) {
       events: {},
       uuid: uuid(),
       style: {
-        top: 100,
-        left: 100,
+        top,
+        left,
         width: 200,
         height: 33,
         fontSize: 14,
@@ -58,8 +58,8 @@ export default function getComponentAttribute(type) {
       events: {},
       uuid: uuid(),
       style: {
-        top: 0,
-        left: 0,
+        top,
+        left,
         width: 200,
         height: 33,
         fontSize: 14,

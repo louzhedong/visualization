@@ -2,7 +2,7 @@
  * @Author: louzhedong
  * @Date: 2021-02-23 11:22:54
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-02-24 17:16:33
+ * @LastEditTime: 2021-02-24 17:35:34
  * @Description: 描述一下咯
  */
 import Vue from 'vue';
@@ -29,12 +29,16 @@ export default new Vuex.Store({
       state.componentData = _componentData;
     },
 
-    deleteComponent(state, index) {
-      // 根据索引值来删除，速度更快
-      const _componentData = Array.prototype.concat.call(
-        [],
-        state.componentData
-      );
+    deleteComponent(state) {
+      const curuuid = state.curComponent.uuid;
+      const _componentData = Array.prototype.concat([], state.componentData);
+
+      let index;
+      for (let i = 0, length = _componentData.length; i < length; i++) {
+        if (curuuid === _componentData[i].uuid) {
+          index = i;
+        }
+      }
       _componentData.splice(index, 1);
       state.componentData = _componentData;
     },
