@@ -2,7 +2,7 @@
  * @Author: louzhedong
  * @Date: 2021-02-24 10:44:01
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-02-24 14:00:22
+ * @LastEditTime: 2021-02-24 16:47:07
  * @Description: 描述一下咯
  */
 import uuid from '@/utils/uuid';
@@ -16,7 +16,6 @@ export default function getComponentAttribute(type) {
       propValue: '文字',
       animations: [],
       events: {},
-      zIndex: 0,
       uuid: uuid(),
       style: {
         top: 0,
@@ -37,7 +36,6 @@ export default function getComponentAttribute(type) {
       propValue: '按钮',
       animations: [],
       events: {},
-      zIndex: 0,
       uuid: uuid(),
       style: {
         top: 100,
@@ -58,7 +56,6 @@ export default function getComponentAttribute(type) {
       propValue: 'https://image.xiaomaiketang.com/xm/yX2crdBPeX.jpg',
       animations: [],
       events: {},
-      zIndex: 0,
       uuid: uuid(),
       style: {
         top: 0,

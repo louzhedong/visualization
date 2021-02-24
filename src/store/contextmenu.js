@@ -2,7 +2,7 @@
  * @Author: louzhedong
  * @Date: 2021-02-24 15:58:23
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-02-24 16:01:10
+ * @LastEditTime: 2021-02-24 16:49:06
  * @Description: 描述一下咯
  */
 
@@ -22,6 +22,6 @@ export default {
 
     hideContextMenu(state) {
       state.menuShow = false;
-    }
+    },
   },
 };

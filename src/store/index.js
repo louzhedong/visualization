@@ -2,7 +2,7 @@
  * @Author: louzhedong
  * @Date: 2021-02-23 11:22:54
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-02-24 16:02:06
+ * @LastEditTime: 2021-02-24 17:16:33
  * @Description: 描述一下咯
  */
 import Vue from 'vue';
@@ -16,7 +16,7 @@ export default new Vuex.Store({
     curComponent: null, //当前选中的组件
     componentData: [],
     isClickComponent: false, // 点击中间画布是否是在点击组件
-    ...contextmenu.state
+    ...contextmenu.state,
   },
   mutations: {
     ...contextmenu.mutations,
@@ -49,7 +49,30 @@ export default new Vuex.Store({
 
     setClickComponentStatus(state, status) {
       state.isClickComponent = status;
-    }
+    },
+
+    // 上移
+    moveUp(state) {
+      const curuuid = state.curComponent.uuid;
+      const _componentData = Array.prototype.concat([], state.componentData);
+
+      let index;
+      for (let i = 0, length = _componentData.length; i < length; i++) {
+        if (curuuid === _componentData[i].uuid) {
+          index = i;
+        }
+      }
+      if (index < _componentData.length) {
+        let temp = _componentData[index];
+        _componentData[index] = _componentData[index + 1];
+        _componentData[index + 1] = temp;
+
+        state.componentData = _componentData;
+      }
+    },
+
+    //下移
+    // moveDown(state) {},
   },
   actions: {},
 });

@@ -2,7 +2,7 @@
  * @Author: louzhedong
  * @Date: 2021-02-24 15:53:23
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-02-24 16:08:05
+ * @LastEditTime: 2021-02-24 17:15:29
  * @Description: 右键菜单
 -->
 
@@ -12,8 +12,8 @@
     v-show="menuShow"
     :style="{ top: menuTop + 'px', left: menuLeft + 'px' }"
   >
-    <ul @mouseup="handleMouseUp">
-      <li>上移</li>
+    <ul>
+      <li @click="handleMoveUp">上移</li>
       <li>下移</li>
       <li>置顶</li>
       <li>置底</li>
@@ -31,7 +31,10 @@ export default {
   computed: mapState(['menuShow', 'menuTop', 'menuLeft']),
 
   methods: {
-    handleMouseUp() {},
+    handleMoveUp() {
+      this.$store.commit('moveUp');
+      this.$store.commit('hideContextMenu');
+    },
   },
 };
 </script>

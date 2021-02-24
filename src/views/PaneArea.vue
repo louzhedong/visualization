@@ -2,7 +2,7 @@
  * @Author: louzhedong
  * @Date: 2021-02-23 11:59:05
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-02-24 16:34:05
+ * @LastEditTime: 2021-02-24 17:21:06
  * @Description: 中心画布 
 -->
 
@@ -15,13 +15,13 @@
     @mouseup="reSelectComponent"
     @contextmenu="handleShowContextMenu"
   >
-    <Grid /> 
+    <Grid />
     <v-shape
       v-for="(item, key) in componentData"
       :key="key"
       :defaultStyle="item.style"
       :active="item.uuid === curComponent.uuid"
-      :zIndex="item.zIndex"
+      :zIndex="key"
       :element="item"
     >
       <component
@@ -43,7 +43,7 @@ import Grid from '@/components/Grid';
 export default {
   components: {
     ContextMenu,
-    Grid
+    Grid,
   },
   data() {
     return {
@@ -79,10 +79,12 @@ export default {
       this.$store.commit('setClickComponentStatus', false);
     },
 
-    reSelectComponent() {
-      if (!this.$store.state.isClickComponent) {
-        this.$store.commit('setCurComponent', { component: null });
-        this.$store.commit('hideContextMenu');
+    reSelectComponent(e) {
+      if (!this.$store.state.isClickComponent && e.target.nodeName === 'rect') {
+        this.$nextTick(() => {
+          this.$store.commit('setCurComponent', { component: null });
+          this.$store.commit('hideContextMenu');
+        });
       }
     },
 
@@ -98,7 +100,8 @@ export default {
         left += target.offsetLeft;
         target = target.parentNode;
       }
-      if (e.target.className === ('v-button' || 'v-image' || 'v-text')) {
+      const includeClass = ['v-button', 'v-img', 'v-text'];
+      if (includeClass.indexOf(e.target.className) > -1) {
         this.$store.commit('showContextMenu', { top, left });
       }
     },

@@ -2,7 +2,7 @@
  * @Author: louzhedong
  * @Date: 2021-02-23 11:50:36
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-02-24 15:28:04
+ * @LastEditTime: 2021-02-24 16:50:42
  * @Description: 描述一下咯
 -->
 
@@ -39,11 +39,7 @@ export default {
     },
     element: {
       type: Object,
-    },
-    zIndex: {
-      type: Number,
-      default: 0,
-    },
+    }
   },
   data() {
     return {

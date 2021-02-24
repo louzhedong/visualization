@@ -2,12 +2,12 @@
  * @Author: louzhedong
  * @Date: 2021-02-23 11:51:24
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-02-24 14:16:25
+ * @LastEditTime: 2021-02-24 17:11:28
  * @Description: 图片组件
 -->
 <template>
   <div class="v-image" :style="ownStyle">
-    <img :src="propValue" draggable="false"/>
+    <img class="v-img" :src="propValue" draggable="false"/>
   </div>
 </template>
 
