@@ -2,7 +2,7 @@
  * @Author: louzhedong
  * @Date: 2021-02-23 11:50:36
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-02-24 14:46:44
+ * @LastEditTime: 2021-02-24 15:28:04
  * @Description: 描述一下咯
 -->
 
@@ -96,6 +96,7 @@ export default {
     // 元素上点击
     handleMouseDown(e) {
       e.stopPropagation();
+      this.$store.commit('setClickComponentStatus', true);
       this.$store.commit('setCurComponent', { component: this.element });
 
       const pos = { ...this.defaultStyle };
@@ -129,6 +130,7 @@ export default {
       const mousedownEvent = window.event;
       mousedownEvent.stopPropagation();
       mousedownEvent.preventDefault();
+      this.$store.commit('setClickComponentStatus', true);
 
       const hasT = /t/.test(point);
       const hasB = /b/.test(point);
