@@ -2,15 +2,21 @@
  * @Author: louzhedong
  * @Date: 2021-02-23 11:50:36
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-02-23 19:46:14
+ * @LastEditTime: 2021-02-24 14:46:44
  * @Description: 描述一下咯
 -->
 
 <template>
-  <div class="v-shape" :class="{ active: this.active }">
+  <div
+    class="v-shape"
+    :class="{ active: this.active }"
+    @mousedown="handleMouseDown"
+    :style="shapeStyle"
+  >
     <div
       class="shape-point"
       v-for="(item, key) in active ? pointList : []"
+      @mousedown="handleMouseDownOnPoint(item)"
       :key="key"
       :style="getPointStyle(item)"
     ></div>
@@ -19,6 +25,7 @@
 </template>
 
 <script>
+import getShapeStyle from '@/utils/getShapeStyle';
 const pointList = ['t', 'r', 'b', 'l', 'lt', 'rt', 'lb', 'rb'];
 export default {
   name: 'v-shape',
@@ -42,6 +49,12 @@ export default {
     return {
       pointList,
     };
+  },
+
+  computed: {
+    shapeStyle() {
+      return getShapeStyle(this.defaultStyle);
+    },
   },
 
   methods: {
@@ -79,14 +92,86 @@ export default {
 
       return style;
     },
+
+    // 元素上点击
+    handleMouseDown(e) {
+      e.stopPropagation();
+      this.$store.commit('setCurComponent', { component: this.element });
+
+      const pos = { ...this.defaultStyle };
+      const startX = e.clientX;
+      const startY = e.clientY;
+
+      const startTop = Number(pos.top);
+      const startLeft = Number(pos.left);
+
+      const move = moveEvent => {
+        const currX = moveEvent.clientX;
+        const currY = moveEvent.clientY;
+        pos.top = currY - startY + startTop;
+        pos.left = currX - startX + startLeft;
+
+        this.$store.commit('setCurComponentStyle', pos);
+        this.$forceUpdate();
+      };
+
+      const up = () => {
+        document.removeEventListener('mousemove', move);
+        document.removeEventListener('mouseup', up);
+      };
+
+      document.addEventListener('mousemove', move);
+      document.addEventListener('mouseup', up);
+    },
+
+    // 小圆点上点击
+    handleMouseDownOnPoint(point) {
+      const mousedownEvent = window.event;
+      mousedownEvent.stopPropagation();
+      mousedownEvent.preventDefault();
+
+      const hasT = /t/.test(point);
+      const hasB = /b/.test(point);
+      const hasR = /r/.test(point);
+      const hasL = /l/.test(point);
+      const pos = { ...this.defaultStyle };
+      const startX = mousedownEvent.clientX;
+      const startY = mousedownEvent.clientY;
+      const height = Number(pos.height);
+      const width = Number(pos.width);
+      const left = Number(pos.left);
+      const top = Number(pos.top);
+
+      const move = moveEvent => {
+        const currX = moveEvent.clientX;
+        const currY = moveEvent.clientY;
+        const distX = currX - startX;
+        const distY = currY - startY;
+        const newHeight = height + (hasT ? -distY : hasB ? distY : 0);
+        const newWidth = width + (hasL ? -distX : hasR ? distX : 0);
+        pos.height = newHeight > 0 ? newHeight : 0;
+        pos.width = newWidth > 0 ? newWidth : 0;
+        pos.left = left + (hasL ? distX : 0);
+        pos.top = top + (hasT ? distY : 0);
+
+        this.$store.commit('setCurComponentStyle', pos);
+      };
+
+      const up = () => {
+        document.removeEventListener('mousemove', move);
+        document.removeEventListener('mouseup', up);
+      }
+
+      document.addEventListener('mousemove', move);
+      document.addEventListener('mouseup', up);
+    },
   },
 };
 </script>
 
-
 <style lang="less">
 .v-shape {
-  position: relative;
+  position: absolute;
   display: inline-block;
   .shape-point {
     width: 6px;

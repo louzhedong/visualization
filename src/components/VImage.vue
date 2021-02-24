@@ -2,12 +2,12 @@
  * @Author: louzhedong
  * @Date: 2021-02-23 11:51:24
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-02-23 14:18:42
+ * @LastEditTime: 2021-02-24 14:16:25
  * @Description: 图片组件
 -->
 <template>
-  <div class="v-image">
-    <img :src="propValue"/>
+  <div class="v-image" :style="ownStyle">
+    <img :src="propValue" draggable="false"/>
   </div>
 </template>
 
@@ -18,6 +18,9 @@ export default {
     propValue: {
       type: String,
       required: true
+    },
+    ownStyle: {
+      type: Object
     }
   },
   data() {
@@ -31,5 +34,9 @@ export default {
 <style lang="less">
 .v-image {
   overflow: hidden;
+  > img {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>
