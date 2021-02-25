@@ -2,7 +2,7 @@
  * @Author: louzhedong
  * @Date: 2021-02-23 11:50:36
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-02-24 18:02:27
+ * @LastEditTime: 2021-02-25 11:36:41
  * @Description: 描述一下咯
 -->
 
@@ -26,7 +26,6 @@
 
 <script>
 import getShapeStyle from '@/utils/getShapeStyle';
-import throttle from '@/utils/throttle';
 
 const pointList = ['t', 'r', 'b', 'l', 'lt', 'rt', 'lb', 'rb'];
 export default {
@@ -114,14 +113,12 @@ export default {
         this.$forceUpdate();
       };
 
-      const _move = throttle(move, 25);
-
       const up = () => {
-        document.removeEventListener('mousemove', _move);
+        document.removeEventListener('mousemove', move);
         document.removeEventListener('mouseup', up);
       };
 
-      document.addEventListener('mousemove', _move);
+      document.addEventListener('mousemove', move);
       document.addEventListener('mouseup', up);
     },
 

@@ -2,8 +2,8 @@
  * @Author: louzhedong
  * @Date: 2021-02-24 17:54:27
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-02-24 17:54:45
- * @Description: 描述一下咯
+ * @LastEditTime: 2021-02-25 09:40:26
+ * @Description: 节流
  */
 export default function throttle(fn, threshhold) {
   // 记录上次执行的时间
