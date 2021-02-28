@@ -1,24 +1,10 @@
+<!--
+ * @Author: louzhedong
+ * @Date: 2021-02-23 11:23:11
+ * @LastEditors: louzhedong
+ * @LastEditTime: 2021-02-25 17:00:56
+ * @Description: 描述一下咯
+-->
 # visualization
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+前端可视化页面构建
