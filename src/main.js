@@ -2,7 +2,7 @@
  * @Author: louzhedong
  * @Date: 2021-02-23 11:22:54
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-02-23 14:10:41
+ * @LastEditTime: 2021-03-26 17:45:03
  * @Description: 描述一下咯
  */
 import Vue from 'vue'
@@ -22,8 +22,11 @@ Vue.component(VImage.name, VImage);
 Vue.component(VText.name, VText);
 Vue.component(VShape.name, VShape);
 
+const __FLAG__ = [name] + '{{hello}}, {{today}}';
+
 new Vue({
   router,
   store,
+  flag: __FLAG__,
   render: h => h(App)
 }).$mount('#app')
