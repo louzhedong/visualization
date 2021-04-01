@@ -2,7 +2,7 @@
  * @Author: louzhedong
  * @Date: 2021-02-23 11:50:36
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-04-01 16:51:55
+ * @LastEditTime: 2021-04-01 16:57:17
  * @Description: 描述一下咯
 -->
 
@@ -155,6 +155,8 @@ export default {
 
         this.$store.commit('setCurComponentStyle', pos);
       };
+
+      
 
 
       const up = () => {
