@@ -2,10 +2,11 @@
  * @Author: louzhedong
  * @Date: 2021-03-26 16:21:39
  * @LastEditors: louzhedong
- * @LastEditTime: 2021-04-01 16:35:26
+ * @LastEditTime: 2021-04-01 16:57:42
  * @Description: 描述一下咯
  */
 const BlankPlugin = require('./plugins/BlankPlugin');
+
 
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
